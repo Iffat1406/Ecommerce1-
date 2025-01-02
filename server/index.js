@@ -13,10 +13,11 @@ const shopAddressRouter = require("./routes/shop/address-routes");
 const shopOrderRouter = require("./routes/shop/order-routes");
 const shopSearchRouter = require("./routes/shop/search-routes");
 const shopReviewRouter = require("./routes/shop/review-routes");
-
 const commonFeatureRouter = require("./routes/common/feature-routes");
+const path = require("path");
 
 const mongoUri = process.env.DATABASE_URI
+const _dirname = path.resolve();
 
 mongoose
   .connect(mongoUri)
@@ -41,6 +42,7 @@ app.use(
   })
 );
 
+
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRouter);
@@ -55,5 +57,10 @@ app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/review", shopReviewRouter);
 
 app.use("/api/common/feature", commonFeatureRouter);
+
+app.use(express.static(path.join(_dirname, "/client/dist")));
+app.get('*', (_, res)=> {
+  res.sendFile(path.resolve(_dirname, "client", "dist", "index.html"))
+});
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
