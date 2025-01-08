@@ -62,15 +62,7 @@ function AuthRegister() {
           </Link>
         </p>
       </div>
-      <CommonForm
-        formControls={registerFormControls}
-        buttonText={"Sign Up"}
-        formData={formData}
-        setFormData={setFormData}
-        onSubmit={onSubmit}
-      />
-
-    <div className="mt-4">
+      <div className="mt-4">
         <label className="block text-sm font-medium text-gray-700">
           Role
         </label>
@@ -83,6 +75,14 @@ function AuthRegister() {
           <option value="admin">Admin</option>
         </select>
       </div>
+      
+      <CommonForm
+        formControls={registerFormControls}
+        buttonText={"Sign Up"}
+        formData={formData}
+        setFormData={setFormData}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 }
