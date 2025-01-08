@@ -5,7 +5,7 @@ const User = require("../../models/User");
 
 //register
 const registerUser = async (req, res) => {
-  const { userName, email, password } = req.body;
+  const { userName, email, password, role } = req.body;
 
   try {
     const checkUser = await User.findOne({ email });
@@ -20,6 +20,7 @@ const registerUser = async (req, res) => {
       userName,
       email,
       password: hashPassword,
+      role,
     });
 
     await newUser.save();

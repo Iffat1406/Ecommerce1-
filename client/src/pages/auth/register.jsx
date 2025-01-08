@@ -10,6 +10,7 @@ const initialState = {
   userName: "",
   email: "",
   password: "",
+  role: "user", // Default role is user
 };
 
 function AuthRegister() {
@@ -37,6 +38,14 @@ function AuthRegister() {
 
   console.log(formData);
 
+  // Handle role change
+  function handleRoleChange(event) {
+    setFormData((prevState) => ({
+      ...prevState,
+      role: event.target.value,
+    }));
+  }
+
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
@@ -60,6 +69,20 @@ function AuthRegister() {
         setFormData={setFormData}
         onSubmit={onSubmit}
       />
+
+    <div className="mt-4">
+        <label className="block text-sm font-medium text-gray-700">
+          Role
+        </label>
+        <select
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          value={formData.role}
+          onChange={handleRoleChange}
+        >
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
     </div>
   );
 }
